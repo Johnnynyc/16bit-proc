@@ -1,8 +1,8 @@
 module mux(
-    input I0,
-    input I1,
+    input [15:0] I0,        //register data 2
+    input [15:0] I1,        //sign extended value
     input Selector,
-    output Output,
+    output [15:0] Output,
     output temp1,
     output temp2
 );
