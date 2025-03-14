@@ -1,6 +1,9 @@
 module mux_tb;
-    reg I0, I1, Selector;
-    wire Output, temp1, temp2;
+    reg [15:0] I0;          //register data 2
+    reg [15:0] I1;          //sign extended value
+    reg Selector;
+    wire [15:0] Output; 
+    wire temp1, temp2;
 
 
 mux utt(
@@ -17,26 +20,26 @@ initial begin
     I0 = 0;
     I1 = 0;
     Selector = 0;
-    #10
+    #10;
     $display("I0 = %b, I1 = %b, Selector = %b, Output = %b", I0, I1, Selector, Output);
 
 
     I0 = 0;
     I1 = 1;
     Selector = 0;
-    #10
+    #10;
     $display("I0 = %b, I1 = %b, Selector = %b, Output = %b", I0, I1, Selector, Output);
 
     I0 = 1;
     I1 = 0;
     Selector = 1;
-    #10
+    #10;
     $display("I0 = %b, I1 = %b, Selector = %b, Output = %b", I0, I1, Selector, Output);
 
     I0 = 1;
     I1 = 1;
     Selector = 1;
-    #10
+    #10;
     $display("I0 = %b, I1 = %b, Selector = %b, Output = %b", I0, I1, Selector, Output);
 
     $finish;
