@@ -5,8 +5,8 @@ module register_file (
     input  [3:0]  WriteReg,
     input  [15:0] WriteData,
     input         RegWrite,
-    output [15:0] ReadData1,
-    output [15:0] ReadData2
+    output reg [15:0] ReadData1,
+    output reg [15:0] ReadData2
 );
     
     reg [15:0] registers [0:15];
