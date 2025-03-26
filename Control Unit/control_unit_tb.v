@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module control_unit_test;
+module control_unit_tb;
     reg [3:0] opcode;
     reg [3:0] function_code;
     wire RegDst;
