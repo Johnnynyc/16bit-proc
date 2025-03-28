@@ -30,7 +30,7 @@ module register_file1_tb;
     wire[15:0] ReadData1;
     wire[15:0] ReadData2;
     
-    register_file_uut(
+    register_file uut(
     .RegRead1(RegRead1),
     .RegRead2(RegRead2),
     .WriteReg (WriteReg),
