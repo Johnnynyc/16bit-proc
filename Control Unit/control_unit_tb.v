@@ -51,47 +51,57 @@ module control_unit_tb;
         opcode = 4'b0000;
         function_code = 4'b0000;  
         #10;
-        $display("add => RegDst=%b, RegWrite=%b, ALUop=%b", RegDst, RegWrite, ALUop);
+       $display("add => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         opcode = 4'b0000;
         function_code = 4'b0001;  
         #10;
-        $display("sub => RegDst=%b, RegWrite=%b, ALUop=%b", RegDst, RegWrite, ALUop);
+       $display("sub => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         opcode = 4'b0000;
         function_code = 4'b0010;  
         #10;
-        $display("sll => RegDst=%b, RegWrite=%b, ALUop=%b", RegDst, RegWrite, ALUop);
+       $display("sll => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         opcode = 4'b0000;
         function_code = 4'b0011;  
         #10;
-        $display("and => RegDst=%b, RegWrite=%b, ALUop=%b", RegDst, RegWrite, ALUop);
+        $display("and => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         opcode = 4'b0001;
         function_code = 4'bxxxx; 
         #10;
-        $display("lw => RegWrite=%b, RegWriteSource=%b, ALUSource=%b, MemRead=%b, ALUop=%b", RegWrite, RegWriteSource, ALUSource, MemRead, ALUop);
+        $display("lw => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         opcode = 4'b0010;
         #10;
-        $display("sw => ALUSource=%b, MemWrite=%b,ALUop=%b", ALUSource, MemWrite, ALUop);
+        $display("sw => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         opcode = 4'b0011;
         #10;
-        $display("addi => RegWrite=%b, ALUSource=%b, ALUop=%b", RegWrite, ALUSource, ALUop);
+       $display("addi => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         opcode = 4'b0100;
         #10;
-        $display("beq => Branch=%b, ALUop=%b", Branch, ALUop);
+        $display("beq => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         opcode = 4'b0101;
         #10;
-        $display("bne => Branch=%b, ALUop=%b", Branch, ALUop);
+        $display("bne => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         opcode = 4'b0110;
         #100;
-        $display("jmp => Jump=%b", Jump);
+        $display("jmp => RegDst=%b, RegWrite=%b, Branch=%b, Jump=%b, ALUop=%b, MemRead=%b, MemWrite=%b, RegWriteSource=%b, ALUSource=%b",
+                 RegDst, RegWrite, Branch, Jump, ALUop, MemRead, MemWrite, RegWriteSource, ALUSource);
         
         $finish;
     end
