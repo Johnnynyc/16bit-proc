@@ -63,14 +63,14 @@ module register_file_tb;
         #10;
         $display("RegRead1=%d, ReadData1=%d,RegRead2=%d, ReadData2=%d",RegRead1, ReadData1,RegRead2, ReadData2); 
         
-         WriteReg = 4'd2;  
+         WriteReg = 4'd1;  
          WriteData = 16'd1000;
          RegWrite = 1;
          #10; 
          
          RegWrite = 0;
-         RegRead1 = 4'd2;
-         RegRead2 = 4'd3;
+         RegRead1 = 4'd0;
+         RegRead2 = 4'd1;
          #10;
          $display("RegRead1=%d, ReadData1=%d,RegRead2=%d, ReadData2=%d",RegRead1, ReadData1,RegRead2, ReadData2);
          
