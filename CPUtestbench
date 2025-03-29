@@ -1,0 +1,49 @@
+`timescale 1ns / 1ps
+
+module processor_tbtest;
+  // Declare Inputs
+  reg clk;
+  reg reset;
+  wire [15:0] tinstruction;
+  wire [15:0] reg1;
+  wire [15:0] reg2;
+  wire [15:0] pc;
+
+  // Instantiate the processor module
+  processor uut (
+    .clk(clk),
+    .reset(reset),
+    .tinstruction(tinstruction),
+    .reg1(reg1),
+    .reg2(reg2),
+    .pc(pc)
+  );
+
+  // Clock Generation (50MHz clock)
+  always begin
+    #10 clk = ~clk; // Toggle clock every 10ns (50MHz)
+  end
+
+  // Initial Block: Stimulus for the simulation
+  initial begin
+    // Initialize signals
+    clk = 0;
+    #5 reset = 1;
+    
+    #15
+    reset = 0;
+    
+
+    // Add test instructions, if needed
+
+    // End the simulation after a few clock cycles
+    #200;
+    $finish;
+  end
+
+  // Monitor important signals (optional)
+  initial begin
+    $monitor("Time: %t | PC: %h | Reset: %b | Clock: %b | tinstr: %h | reg1: %b | reg2: %b", $time, pc, reset, clk, tinstruction, reg1, reg2);
+  end
+
+endmodule
