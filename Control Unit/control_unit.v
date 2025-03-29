@@ -1,4 +1,24 @@
 `timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 03/26/2025 05:15:05 PM
+// Design Name: 
+// Module Name: control_unit
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 
 module control_unit(opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop, MemRead,MemWrite,RegWriteSource,ALUSource);
     input [3:0] opcode;
@@ -40,37 +60,76 @@ module control_unit(opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop, Mem
             end
             
             4'b0001: begin //lw
-                RegWrite =1;
-                RegWriteSource = 1;  
-                ALUSource =1;
-                MemRead =1;
-                ALUop =4'b0000;
+                RegDst = 0;       
+                RegWrite = 1;
+                Branch = 0;
+                Jump = 0;
+                ALUop = 4'b0000;
+                MemRead = 1;
+                MemWrite = 0;
+                RegWriteSource = 1;
+                ALUSource = 1;
             end
             
             4'b0010: begin //sw
-            ALUSource = 1;
-            MemWrite  = 1;
-            ALUop     = 4'b0000; 
+                RegDst = 0;      
+                RegWrite = 0;
+                Branch = 0;
+                Jump = 0;
+                ALUop = 4'b0000;
+                MemRead = 0;
+                MemWrite = 1;
+                RegWriteSource = 0; 
+                ALUSource = 1;
             end
             
             4'b0011: begin //addi
-            RegWrite  = 1;
-            ALUSource = 1;
-            ALUop     = 4'b0000; 
+                RegDst = 0;       
+                RegWrite = 1;
+                Branch = 0;
+                Jump = 0;
+                ALUop = 4'b0000;
+                MemRead = 0;
+                MemWrite = 0;
+                RegWriteSource = 0;
+                ALUSource = 1;
             end
             
             4'b0100: begin //beq
-            Branch =1;
-            ALUop     = 4'b0001; 
+                RegDst = 0;       
+                RegWrite = 0;
+                Branch = 1;
+                Jump = 0;
+                ALUop = 4'b0001;
+                MemRead = 0;
+                MemWrite = 0;
+                RegWriteSource = 0;
+                ALUSource = 0;
             end
             
             4'b0101: begin //bne
-            Branch =1;
-            ALUop     = 4'b0001; 
+                RegDst = 0;
+                RegWrite = 0;
+                Branch = 1;
+                Jump = 0;
+                ALUop = 4'b0001;
+                MemRead = 0;
+                MemWrite = 0;
+                RegWriteSource = 0;
+                ALUSource = 0;
+
             end
             
             4'b0110: begin //jmp
-            Jump =1;
+                RegDst = 0;
+                RegWrite = 0;
+                Branch = 0;
+                Jump = 1;
+                ALUop = 4'b0000; // May not be used
+                MemRead = 0;
+                MemWrite = 0;
+                RegWriteSource = 0;
+                ALUSource = 0;
             end
         endcase
     end
@@ -79,4 +138,3 @@ endmodule
         
    
                 
-
