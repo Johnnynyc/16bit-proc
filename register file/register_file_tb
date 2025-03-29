@@ -21,7 +21,9 @@
 
 
 
-module register_file1_tb;
+module register_file_tb;
+    reg clk;
+    reg reset;
     reg[3:0] RegRead1;
     reg[3:0]RegRead2;
     reg[3:0] WriteReg;
@@ -31,6 +33,8 @@ module register_file1_tb;
     wire[15:0] ReadData2;
     
     register_file uut(
+    .clk(clk),
+    .reset(reset),
     .RegRead1(RegRead1),
     .RegRead2(RegRead2),
     .WriteReg (WriteReg),
@@ -39,12 +43,39 @@ module register_file1_tb;
     .ReadData1(ReadData1),
     .ReadData2 (ReadData2)
     );
+     always #5 clk = ~clk;
+
 
     initial begin
+        clk =0;
+        reset = 1;
+        RegRead1 = 4'd0;
+        RegRead2 = 4'd1;
+        RegWrite = 0;
+        WriteReg = 4'd0;
+        WriteData = 16'd0;
+        #10;
+        
+        reset=0;
         RegRead1 =4'd0;
         RegRead2 =4'd1;
         RegWrite =0;
-        $display("RegRead1=%d, ReadData1=%d,RegRead2=%d, ReadData2=%d",RegRead1, ReadData1,RegRead2, ReadData2);        
+        #10;
+        $display("RegRead1=%d, ReadData1=%d,RegRead2=%d, ReadData2=%d",RegRead1, ReadData1,RegRead2, ReadData2); 
+        
+         WriteReg = 4'd2;  
+         WriteData = 16'd1000;
+         RegWrite = 1;
+         #10; 
+         
+         RegWrite = 0;
+         RegRead1 = 4'd2;
+         RegRead2 = 4'd3;
+         #10;
+         $display("RegRead1=%d, ReadData1=%d,RegRead2=%d, ReadData2=%d",RegRead1, ReadData1,RegRead2, ReadData2);
+         
+         $finish;     
+            
     end
     
     
