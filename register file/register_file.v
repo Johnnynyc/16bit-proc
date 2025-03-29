@@ -21,6 +21,8 @@
 
 
 module register_file (
+    input clk,
+    input reset,
     input  [3:0]  RegRead1, 
     input  [3:0]  RegRead2,
     input  [3:0]  WriteReg,
@@ -33,9 +35,16 @@ module register_file (
     reg [15:0] registers [0:15];
     assign ReadData1 = registers[RegRead1];
     assign ReadData2 = registers[RegRead2];
+    integer i;
     
-    always @(*) begin
+    always @(posedge clk or posedge reset) begin
+    if(reset) begin
+    for (i=0; i<16; i=i+1) begin
+        registers[i] <=16'd0;
+        end
+    end else begin
         if (RegWrite)
-            registers[WriteReg] = WriteData;
+            registers[WriteReg] <= WriteData;
+        end
     end
 endmodule
