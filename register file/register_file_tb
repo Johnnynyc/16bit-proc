@@ -49,30 +49,30 @@ module register_file_tb;
     initial begin
         clk =0;
         reset = 1;
-        RegRead1 = 4'd0;
-        RegRead2 = 4'd1;
+        RegRead1 = 4'b0;
+        RegRead2 = 4'b1;
         RegWrite = 0;
-        WriteReg = 4'd0;
-        WriteData = 16'd0;
+        WriteReg = 4'b0;
+        WriteData = 16'b0;
         #10;
         
         reset=0;
-        RegRead1 =4'd0;
-        RegRead2 =4'd1;
+        RegRead1 =4'b0;
+        RegRead2 =4'b1;
         RegWrite =0;
         #10;
-        $display("RegRead1=%d, ReadData1=%d,RegRead2=%d, ReadData2=%d",RegRead1, ReadData1,RegRead2, ReadData2); 
+        $display("RegRead1=%b, ReadData1=%b,RegRead2=%b, ReadData2=%b",RegRead1, ReadData1,RegRead2, ReadData2); 
         
-         WriteReg = 4'd1;  
-         WriteData = 16'd1000;
+         WriteReg = 4'b1;  
+         WriteData = 16'b1111000011110000;
          RegWrite = 1;
          #10; 
          
          RegWrite = 0;
-         RegRead1 = 4'd0;
-         RegRead2 = 4'd1;
+         RegRead1 = 4'b0;
+         RegRead2 = 4'b1;
          #10;
-         $display("RegRead1=%d, ReadData1=%d,RegRead2=%d, ReadData2=%d",RegRead1, ReadData1,RegRead2, ReadData2);
+         $display("RegRead1=%b, ReadData1=%b, RegRead2=%b, ReadData2=%b", RegRead1, ReadData1, RegRead2, ReadData2);
          
          $finish;     
             
