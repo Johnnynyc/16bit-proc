@@ -38,13 +38,14 @@ module register_file (
     integer i;
     
     always @(negedge clk or posedge reset)  begin
-    if(reset) begin
-    for (i=0; i<16; i=i+1) begin
-        registers[i] <=16'b0;
+        if(reset) begin
+            for (i=0; i<16; i=i+1) begin
+                registers[i] <=16'b0;
+            end
+        end 
+        else begin
+            if (RegWrite)
+                registers[WriteReg] <= WriteData;
+            end
         end
-    end else begin
-        if (RegWrite)
-            registers[WriteReg] <= WriteData;
-        end
-    end
 endmodule
