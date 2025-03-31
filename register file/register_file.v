@@ -46,6 +46,6 @@ module register_file (
         else begin
             if (RegWrite)
                 registers[WriteReg] <= WriteData;
-            end
         end
+    end
 endmodule
