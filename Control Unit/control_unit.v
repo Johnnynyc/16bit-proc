@@ -20,7 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module control_unit(opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop, MemRead,MemWrite,RegWriteSource,ALUSource);
+module control_unit(clk,opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop, MemRead,MemWrite,RegWriteSource,ALUSource);
+    input clk;    
     input [3:0] opcode;
     input [3:0] function_code;
     output reg RegDst;
@@ -48,14 +49,48 @@ module control_unit(opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop, Mem
     always @(*)
         begin
         case(opcode)
-            4'b0000: begin //R-type: add, sub, sll, and
-                RegDst =1;
-                RegWrite =1;
+            4'b0000: begin 
                 case(function_code)
-                    4'b0000: ALUop = 4'b0000;
-                    4'b0001: ALUop = 4'b0001;
-                    4'b0010: ALUop = 4'b0010;
-                    4'b0011: ALUop = 4'b0011;
+                    4'b0000: begin //add
+                        RegDst = 1;       
+                        RegWrite = 1;
+                        Branch = 0;
+                        Jump = 0;
+                        ALUop = 4'b0000;
+                        MemRead = 0;
+                        MemWrite = 0;
+                        RegWriteSource = 0;
+                    end
+                    4'b0001: begin //sub
+                        RegDst = 1;       
+                        RegWrite = 1;
+                        Branch = 0;
+                        Jump = 0;
+                        ALUop = 4'b0001;
+                        MemRead = 0;
+                        MemWrite = 0;
+                        RegWriteSource = 0;
+                    end
+                    4'b0010: begin //sll
+                        RegDst = 1;       
+                        RegWrite = 1;
+                        Branch = 0;
+                        Jump = 0;
+                        ALUop = 4'b0010;
+                        MemRead = 0;
+                        MemWrite = 0;
+                        RegWriteSource = 0;
+                    end
+                    4'b0011: begin //and
+                        RegDst = 1;       
+                        RegWrite = 1;
+                        Branch = 0;
+                        Jump = 0;
+                        ALUop = 4'b0011;
+                        MemRead = 0;
+                        MemWrite = 0;
+                        RegWriteSource = 0;
+                    end
                 endcase
             end
             
