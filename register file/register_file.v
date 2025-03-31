@@ -40,7 +40,7 @@ module register_file (
     always @(posedge clk or posedge reset) begin
     if(reset) begin
     for (i=0; i<16; i=i+1) begin
-        registers[i] <=16'd0;
+        registers[i] <=16'b0;
         end
     end else begin
         if (RegWrite)
