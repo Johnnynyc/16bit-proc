@@ -19,6 +19,15 @@ module Data_Memory(
     // Assign internal reg to the OutputData wire
     assign OutputData = OutputReg;  // Continuously assign internal reg to outputdata
         
+        
+        
+    always @ (*) begin
+    
+    if (ReadEnable) begin 
+            OutputReg <= memory[SourceAddress];
+           end
+    
+    end
     
     always @ (negedge clk) begin
     
@@ -41,10 +50,14 @@ module Data_Memory(
             memory[SourceAddress] <= InputData;
             end
             
-            if (ReadEnable) begin 
-            OutputReg <= memory[SourceAddress];
-           end
     
     end
     end
+    
+      initial begin
+  
+        $monitor("Time inside DATAMEM: %t WE: %h | RE: %h | sourceAdd: %h | inputdata: %h | OutputData : %h | MEM[1]: %h| MEM[2]: %h", 
+        $time, WriteEnable, ReadEnable, SourceAddress, InputData, OutputData, memory[1], memory[2]);
+  end
+  
 endmodule

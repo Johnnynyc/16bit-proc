@@ -5,7 +5,7 @@ module program_counter (
     output reg [15:0] PC         // Current PC value
 );
 
-always @(posedge clk or posedge reset) begin
+always @(posedge clk) begin
     if (reset) 
         PC <= 16'b0; // Reset PC to 0
     else 

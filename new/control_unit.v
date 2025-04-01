@@ -125,6 +125,11 @@ module control_unit(opcode,function_code,clk,RegDst,RegWrite, Branch,Jump,ALUop,
             end
         endcase
     end
+    
+    initial begin
+    $monitor("Time inside ControlUNIT: %t | JUMP: %h| BRANCH: %b", $time, Jump, Branch);
+    end
+    
 endmodule
 
         

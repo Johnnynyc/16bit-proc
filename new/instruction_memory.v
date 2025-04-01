@@ -22,11 +22,19 @@ module instruction_memory(
    initial begin
         memory[0] = 16'b0011000100010001;  // addi r1 r1 1
         memory[2] = 16'b0011001000100010;  // addi r2 r2 2
-        memory[4] = 16'b0011001000100010;  // addi r2 r2 2
+       // memory[4] = 16'b0011001000100010;  // addi r2 r2 2
+        
+        memory[4] = 16'b0110111111111100;  // jump memory 0 *WORKING
+
+        //memory[4] = 16'b0010000100100000;  // Example instruction SW 
+        memory[6] = 16'b0010001000010000;  // Example instruction SW 
+        
+        memory[8] = 16'b0001010000100000;  // Example instruction LW
+        //memory[10] = 16'b0001001100010000;  // Example instruction LW
         
         
-        memory[6] = 16'b0000001000010000;  // Example instruction (add) r3 r2
-        memory[8] = 16'b0000001100010001;  // Example instruction (sub) r1-r3
+        //memory[6] = 16'b0000001000010000;  // Example instruction (add) r3 r2
+        //memory[8] = 16'b0000001100010001;  // Example instruction (sub) r1-r3
         
         //memory[2] = 16'b0110000000000001;  // jmp
         // More instructions can be loaded here
@@ -44,7 +52,7 @@ module instruction_memory(
     
    // Monitor important signals (optional)
   initial begin
-    //$monitor("Time inside im: %t |Address: %h| Instruction: %b", $time, address, instruction);
+    $monitor("Time inside IJMMMMMMMMMMMMMMMMMMM: %t |Address: %h| Instruction: %b", $time, address, instruction);
   end
     
     

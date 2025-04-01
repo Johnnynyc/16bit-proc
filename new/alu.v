@@ -6,7 +6,7 @@ module alu(
     input clk
 );
 
-always @(posedge clk) begin
+always @(*) begin
 
     case(Opcode)
     
