@@ -8,10 +8,19 @@ module alu(
 always @(*) begin
 
     case(Opcode)
-        4'b0000: Output = A + B;            //addition
-        4'b0001: Output = A - B;            //subtraction
-        4'b0010: Output = A << B;           //SLL
-        4'b0011: Output = A & B;            //AND
+    
+        4'b0000: begin
+        Output = A + B;  
+        end          //addition
+        4'b0001: begin
+        Output = A - B;  
+        end          //subtraction
+        4'b0010: begin
+        Output = A << B;   
+        end        //SLL
+        4'b0011: begin
+        Output = A & B;   
+        end         //AND
     endcase
 
 end
