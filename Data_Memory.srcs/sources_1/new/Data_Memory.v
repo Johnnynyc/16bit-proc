@@ -20,7 +20,7 @@ module Data_Memory(
     assign OutputData = OutputReg;  // Continuously assign internal reg to outputdata
         
     
-    always @ (posedge clk) begin
+    always @ (negedge clk) begin
     
         //memory[0] = 3;
         //memory[2] = 4;
