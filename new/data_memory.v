@@ -29,7 +29,7 @@ module Data_Memory(
     
     end
     
-    always @ (negedge clk) begin
+    always @ (posedge clk) begin
     
         //memory[0] = 3;
         //memory[2] = 4;

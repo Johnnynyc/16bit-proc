@@ -20,7 +20,7 @@ module processor_tbtest;
     clk = 0;
     #5 reset = 1;
     
-    #100
+    #10
     reset = 0;
     
 

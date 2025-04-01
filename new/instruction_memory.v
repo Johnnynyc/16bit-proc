@@ -24,7 +24,7 @@ module instruction_memory(
         memory[2] = 16'b0011001000100010;  // addi r2 r2 2
        // memory[4] = 16'b0011001000100010;  // addi r2 r2 2
         
-        memory[4] = 16'b0110111111111100;  // jump memory 0 *WORKING
+        memory[4] = 16'b0110111111111101;  // jump memory 0 NOT *WORKING
 
         //memory[4] = 16'b0010000100100000;  // Example instruction SW 
         memory[6] = 16'b0010001000010000;  // Example instruction SW 
@@ -52,7 +52,7 @@ module instruction_memory(
     
    // Monitor important signals (optional)
   initial begin
-    $monitor("Time inside IJMMMMMMMMMMMMMMMMMMM: %t |Address: %h| Instruction: %b", $time, address, instruction);
+    //$monitor("Time inside IJMMMMMMMMMMMMMMMMMMM: %t |Address: %h| Instruction: %b", $time, address, instruction);
   end
     
     

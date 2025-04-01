@@ -21,7 +21,7 @@ module register_file (
     
     integer i;
     
-    always @(negedge clk) begin
+    always @(posedge clk) begin
     
     if(reset) begin
     for (i=0; i<16; i=i+1) begin
