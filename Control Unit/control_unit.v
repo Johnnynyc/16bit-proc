@@ -49,9 +49,9 @@ module control_unit(clk,opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop,
     always @(*)
         begin
         case(opcode)
-            4'b0000: begin 
+            4'b0000: begin //R-type: add, sub, sll, and
                 case(function_code)
-                    4'b0000: begin //add
+                    4'b0000: begin
                         RegDst = 1;       
                         RegWrite = 1;
                         Branch = 0;
@@ -60,8 +60,9 @@ module control_unit(clk,opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop,
                         MemRead = 0;
                         MemWrite = 0;
                         RegWriteSource = 0;
+                        ALUSource=0;
                     end
-                    4'b0001: begin //sub
+                    4'b0001: begin
                         RegDst = 1;       
                         RegWrite = 1;
                         Branch = 0;
@@ -70,8 +71,9 @@ module control_unit(clk,opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop,
                         MemRead = 0;
                         MemWrite = 0;
                         RegWriteSource = 0;
+                        ALUSource=0;
                     end
-                    4'b0010: begin //sll
+                    4'b0010: begin
                         RegDst = 1;       
                         RegWrite = 1;
                         Branch = 0;
@@ -80,8 +82,9 @@ module control_unit(clk,opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop,
                         MemRead = 0;
                         MemWrite = 0;
                         RegWriteSource = 0;
+                        ALUSource=0;
                     end
-                    4'b0011: begin //and
+                    4'b0011: begin
                         RegDst = 1;       
                         RegWrite = 1;
                         Branch = 0;
@@ -90,6 +93,7 @@ module control_unit(clk,opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop,
                         MemRead = 0;
                         MemWrite = 0;
                         RegWriteSource = 0;
+                        ALUSource=0;
                     end
                 endcase
             end
@@ -160,7 +164,7 @@ module control_unit(clk,opcode,function_code,RegDst,RegWrite, Branch,Jump,ALUop,
                 RegWrite = 0;
                 Branch = 0;
                 Jump = 1;
-                ALUop = 4'b0000; // May not be used
+                ALUop = 4'b0000; 
                 MemRead = 0;
                 MemWrite = 0;
                 RegWriteSource = 0;
