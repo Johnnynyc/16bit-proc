@@ -41,6 +41,7 @@ wire alu_src;
 wire zero_flag        = (read_data1 == read_data2);
 wire not_equal_flag   = (read_data1 != read_data2);
 wire bne              = (opcode == 4'b0101); // bne opcode
+wire beq = (opcode == 4'b0100);
 
 // Write-back Logic
 wire [3:0] write_reg   = dest;  // Always writing to bits 11:8 for both R/I types
@@ -53,11 +54,12 @@ wire [15:0] branch_target  = pc_plus_2 + branch_offset;
 wire [15:0] jmp_offset     = {{4{jmp_addr[11]}}, jmp_addr} << 1;
 wire [15:0] jump_target    = pc_plus_2 + jmp_offset;
 
+//immediate is left shifted 1, added to pc + 2 (Next address of pc), 
 
 //----------------------------
 
 assign pc_next = (jump)                          ? jump_target :
-                 (branch && zero_flag)           ? branch_target :
+                 (branch && zero_flag && beq)           ? branch_target :
                  (bne && not_equal_flag)         ? branch_target :
                  pc_plus_2;
 
@@ -124,8 +126,7 @@ alu ALU (
     .A(read_data1),
     .B(alu_src_mux_out),
     .Opcode(alu_op),
-    .Output(alu_result),
-    .clk(clk)
+    .Output(alu_result)
 );
 
 Data_Memory DMEM (
