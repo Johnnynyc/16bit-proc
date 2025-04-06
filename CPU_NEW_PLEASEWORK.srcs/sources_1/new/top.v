@@ -10,9 +10,9 @@ module processor (
 wire [15:0] rd;
 
 // Instruction Wires
-wire [15:0] pc_current;
+wire [15:0] pc_current; // current instruction address
 wire [15:0] pc_next;
-wire [15:0] instruction;
+wire [15:0] instruction; // instruction fetched from memory
 
 // Instruction Decoding
 wire [3:0] opcode      = instruction[15:12];
@@ -22,23 +22,23 @@ wire [3:0] imm_or_fn   = instruction[3:0];   // immediate (I-type) or func_code 
 wire [11:0] jmp_addr   = instruction[11:0];  // jump target (J-type)
 
 // Datapath Wires
-wire [15:0] read_data1;
-wire [15:0] read_data2;
-wire [15:0] alu_src_mux_out;
-wire [15:0] alu_result;
-wire [15:0] sign_ext_imm;
-wire [15:0] mem_read_data;
+wire [15:0] read_data1; // value from reg
+wire [15:0] read_data2; // value from reg
+wire [15:0] alu_src_mux_out; // either immediate or register value chosen by mux
+wire [15:0] alu_result; // result of alu
+wire [15:0] sign_ext_imm; // extended immediate value
+wire [15:0] mem_read_data; // value read from memory
 
 // Control Signals
 wire reg_dst;
-wire reg_write;
-wire branch;
+wire reg_write; // enables writing to register
+wire branch; 
 wire jump;
 wire [3:0] alu_op;
-wire mem_read;
-wire mem_write;
-wire reg_write_src;
-wire alu_src;
+wire mem_read; // enables reading from memory
+wire mem_write; // enables writing to memory
+wire reg_write_src; // chooses either alu or memory data
+wire alu_src; // chooses between immediate or register value for alu
 
 // Flags for Branching
 wire zero_flag        = (read_data1 == read_data2);
@@ -48,7 +48,7 @@ wire beq = (opcode == 4'b0100);
 
 // Write-back Logic
 wire [3:0] write_reg   = dest;  // Always writing to bits 11:8 for both R/I types
-wire [15:0] write_data = (reg_write_src) ? mem_read_data : alu_result;
+wire [15:0] write_data = (reg_write_src) ? mem_read_data : alu_result; // chooses either alu or memory data
 
 // Program Counter Update
 wire [15:0] pc_plus_2      = pc_current + 2;
@@ -62,7 +62,7 @@ wire [15:0] jump_target    = pc_plus_2 + jmp_offset;
 //----------------------------
 
 assign pc_next = (jump)                          ? jump_target :
-                 (branch && zero_flag && beq)           ? branch_target :
+                 (branch && zero_flag && beq)           ? branch_target : // block to calculate next pc address based on signals
                  (bne && not_equal_flag)         ? branch_target :
                  pc_plus_2;
 
@@ -100,7 +100,7 @@ register_file RF (
     .RegRead1(src),
     .RegRead2(dest),
     .WriteReg(write_reg),
-    .WriteData(write_data),
+    .WriteData(write_data), // register file provides operands
     .RegWrite(reg_write),
     .ReadData1(read_data1),
     .ReadData2(read_data2),
@@ -119,7 +119,7 @@ wire temp1, temp2;
 mux ALU_SRC_MUX (
     .I0(read_data2),
     .I1(sign_ext_imm),
-    .Selector(alu_src),
+    .Selector(alu_src), // mux chooses second operand to be used by ALU based on signals
     .Output(alu_src_mux_out),
     .temp1(temp1),
     .temp2(temp2),
@@ -137,7 +137,7 @@ Data_Memory DMEM (
     .WriteEnable(mem_write),
     .ReadEnable(mem_read),
     .SourceAddress(alu_result[7:0]),  // 64-byte memory address space
-    .InputData(read_data2),
+    .InputData(read_data2),		// stores values for sw, loads values for lw
     .OutputData(mem_read_data),
     .reset(reset),
     .clk(clk)
